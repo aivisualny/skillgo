@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap');
+
+body, html {
+  background: #fff !important;
+  font-family: 'Pretendard', 'Inter', 'Noto Sans KR', sans-serif;
+  color: #1a2340;
+  font-size: 20px;
+}
+
+main, .container {
+  background: #fff !important;
+}
+
+h1, h2, h3 {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: 1.2em;
+  font-weight: 700;
+  border-radius: 1.5em;
+  box-shadow: 0 2px 16px 0 rgba(41,82,227,0.07);
+  border: none;
+  outline: none;
+}
+
+button {
+  background: #2952e3;
+  color: #fff;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 16px 0 rgba(41,82,227,0.07);
+}
+button:hover, button:focus {
+  background: #1a2340;
+  color: #fff;
+  box-shadow: 0 4px 24px 0 rgba(41,82,227,0.13);
+}
+
+input[type="text"], input[type="search"] {
+  background: #fff;
+  color: #1a2340;
+  border: 1.5px solid #e0e7ef;
+  padding: 1.2em 2em;
+  border-radius: 2em;
+  font-size: 1.2em;
+  font-weight: 600;
+  box-shadow: 0 2px 16px 0 rgba(41,82,227,0.07);
+}
+
+.card, .tool-card {
+  background: #fff;
+  border-radius: 2em;
+  box-shadow: 0 2px 16px 0 rgba(41,82,227,0.07);
+  border: 1.5px solid #e0e7ef;
+  padding: 2.5em 2em;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background: #f5f7fa;
+}
+::-webkit-scrollbar-thumb {
+  background: #e0e7ef;
+  border-radius: 8px;
+}

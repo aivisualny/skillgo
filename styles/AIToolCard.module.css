@@ -1,0 +1,92 @@
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  margin-bottom: 24px;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: #1a1a1a;
+}
+
+.description {
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.details {
+  margin-bottom: 20px;
+}
+
+.label {
+  font-weight: 600;
+  color: #444;
+  margin-right: 8px;
+}
+
+.platforms {
+  margin-bottom: 16px;
+}
+
+.platform {
+  background: #f0f0f0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  font-size: 0.9rem;
+}
+
+.features ul,
+.community ul,
+.tutorials ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+
+.features li,
+.community li,
+.tutorials li {
+  margin: 4px 0;
+  color: #555;
+}
+
+.community a,
+.tutorials a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.community a:hover,
+.tutorials a:hover {
+  text-decoration: underline;
+}
+
+.actions {
+  margin-top: 20px;
+}
+
+.button {
+  display: inline-block;
+  background: #2563eb;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background: #1d4ed8;
+} 
