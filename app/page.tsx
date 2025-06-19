@@ -9,19 +9,19 @@ const aiCategories = [
   {
     key: 'video',
     name: '🎬 비디오 생성',
-    desc: '텍스트를 입력하거나 이미지로 동영상을 만들 수 있는 도구들',
+    desc: 'AI로 영상 만들기',
     toolCategories: ['AI 비디오 생성'],
   },
   {
     key: 'image',
     name: '🖼️ 이미지 생성',
-    desc: '프롬프트를 통해 그림, 사진, 일러스트를 생성',
+    desc: 'AI 그림/사진 생성',
     toolCategories: ['AI 이미지 생성'],
   },
   {
     key: 'voice',
-    name: '🎤 음성 생성 / TTS',
-    desc: '텍스트를 자연스러운 음성으로 변환',
+    name: '🗣️ 음성 생성 / TTS',
+    desc: 'AI 목소리 만들기',
     toolCategories: ['AI 음성 생성'],
   },
   {
@@ -91,7 +91,7 @@ export default function Home() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="flex-1 px-10 py-7 text-2xl outline-none bg-white text-[#1a2340] placeholder-[#b6c2d6] font-sans rounded-full"
-              placeholder="예: 비디오 편집, GAN, SQLD..."
+              placeholder="예: 유튜브 영상 만들기, 목소리 변환, 번역, 코드 생성"
             />
             <button
               type="submit"
@@ -107,15 +107,26 @@ export default function Home() {
               <button
                 key={cat.key}
                 onClick={() => setSelectedCat(cat.key)}
-                className={`px-8 py-4 rounded-full font-bold text-2xl border shadow-sm transition-all duration-150 font-sans tracking-tight ${selectedCat === cat.key ? 'bg-[#2952e3] text-white border-[#2952e3] scale-105 shadow-lg' : 'bg-[#f5f7fa] text-[#1a2340] border-[#e0e7ef] hover:bg-[#e9f0fb]'}`}
+                className={`group relative px-8 py-4 rounded-full font-bold text-2xl border shadow-sm transition-all duration-150 font-sans tracking-tight ${selectedCat === cat.key ? 'bg-[#2952e3] text-white border-[#2952e3] scale-105 shadow-lg' : 'bg-[#f5f7fa] text-[#1a2340] border-[#e0e7ef] hover:bg-[#e9f0fb]'}`}
+                title={cat.desc}
               >
-                {cat.name}
+                <div className="flex flex-col items-center">
+                  <span>{cat.name}</span>
+                  <span className={`text-sm font-normal mt-1 ${selectedCat === cat.key ? 'text-blue-100' : 'text-gray-500'}`}>
+                    {cat.desc}
+                  </span>
+                </div>
+                {/* 툴팁 */}
+                <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                  {cat.desc}
+                  <div className="absolute top-full left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-gray-800"></div>
+                </div>
               </button>
             ))}
           </div>
           {/* 카테고리 설명 */}
           {currentCat && (
-            <div className="text-center mb-12">
+            <div className="text-center mb-12 animate-fade-in">
               <div className="text-4xl font-extrabold text-[#1a2340] mb-3 flex items-center justify-center gap-2 font-sans tracking-tight">
                 <span>{currentCat.name}</span>
               </div>
@@ -124,7 +135,7 @@ export default function Home() {
           )}
           {/* 툴 카드 리스트 */}
           {currentCat && (
-            <div className="flex flex-col gap-10 w-full items-center">
+            <div className="flex flex-col gap-10 w-full items-center animate-slide-up">
               {currentTools.length === 0 && (
                 <div className="text-center text-gray-400">아직 등록된 툴이 없습니다.</div>
               )}
@@ -132,31 +143,54 @@ export default function Home() {
                 return (
                   <div
                     key={tool.id}
-                    className={"flex flex-row bg-white rounded-3xl border border-[#e0e7ef] p-8 gap-8 group transition-all duration-200 shadow-lg hover:shadow-2xl hover:scale-[1.01] hover:border-[#2952e3]"}
+                    className={"flex flex-row bg-white rounded-3xl border border-[#e0e7ef] p-8 gap-8 group transition-all duration-200 shadow-lg hover:shadow-2xl hover:scale-[1.01] hover:border-[#2952e3] cursor-pointer"}
                     style={{ minHeight: 300, maxWidth: '90vw', width: '100%', fontFamily: 'Noto Sans KR, Inter, sans-serif' }}
+                    onClick={() => router.push(`/tool/${tool.id}`)}
                   >
                     {/* 왼쪽: 로고, 이름, 추천 한 줄, 난이도 뱃지 */}
                     <div className="flex flex-col justify-between min-w-[180px] max-w-[220px] flex-shrink-0 h-full">
                       <div>
                         <div className="flex items-center gap-4 mb-2">
-                          {tool.logo && (
+                          {tool.logo ? (
                             <img src={tool.logo} alt={tool.name + ' 로고'} className="w-14 h-14 rounded-full bg-[#f5f7fa] border border-[#e0e7ef] object-contain shadow-sm" />
+                          ) : (
+                            <div className="w-14 h-14 rounded-full bg-[#f5f7fa] border border-[#e0e7ef] flex items-center justify-center shadow-sm">
+                              <span className="text-2xl">🔍</span>
+                            </div>
                           )}
                           <span className="font-extrabold text-[#1a2340] text-2xl tracking-tight drop-shadow-sm" style={{fontFamily: 'Noto Sans KR, Inter, sans-serif'}}>{tool.name}</span>
                         </div>
-                        {tool.recommend && (
-                          <div className="text-base text-[#2952e3] mt-3 font-semibold" style={{fontFamily: 'Noto Sans KR, Inter, sans-serif'}}>
-                            {tool.recommend.split('\n')[0].replace(/^[✅💡\-\*\s]+/, '')}
+                        {/* 툴 요약문 */}
+                        <div className="text-base text-[#2952e3] mt-3 font-semibold" style={{fontFamily: 'Noto Sans KR, Inter, sans-serif'}}>
+                          {tool.category === 'AI 비디오 생성' ? '📽 유튜브용 영상 쉽게 만들기' :
+                           tool.category === 'AI 이미지 생성' ? '🎨 그림을 입력하면 AI가 동영상으로 변환해줘요' :
+                           tool.category === 'AI 음성 생성' ? '🗣️ 텍스트를 자연스러운 목소리로 변환' :
+                           tool.category === 'AI 채팅' ? '💬 질문하면 AI가 답변해줘요' :
+                           tool.category === 'AI 텍스트 생성' ? '✍️ 블로그, 이메일 자동 작성 도우미' :
+                           tool.category === 'AI 코딩 도우미' ? '🧠 코드 자동완성과 오류 수정' :
+                           tool.category === 'AI 번역' ? '🔤 텍스트 번역과 요약' :
+                           '✨ AI로 쉽고 빠르게 작업하기'}
+                        </div>
+                      </div>
+                      {/* 배지들 */}
+                      <div className="flex flex-col gap-2 mt-4">
+                        {tool.difficulty && (
+                          <div className={`px-4 py-1 rounded-full text-base font-bold shadow-sm w-fit text-center ${tool.difficulty === '입문자 추천' ? 'bg-[#e6fbe6] text-[#1a4d2e]' : tool.difficulty === '프롬프트 필요' ? 'bg-[#fff7e6] text-[#7a5a00]' : 'bg-[#ffe6e6] text-[#7a1a1a]'}`}
+                            style={{fontFamily: 'Noto Sans KR, Inter, sans-serif'}}>
+                            {tool.difficulty}
+                          </div>
+                        )}
+                        {tool.koreanSupport && (
+                          <div className="px-4 py-1 rounded-full text-base font-bold shadow-sm w-fit text-center bg-[#e9f0fb] text-[#2952e3]" style={{fontFamily: 'Noto Sans KR, Inter, sans-serif'}}>
+                            🇰🇷 한글 지원
+                          </div>
+                        )}
+                        {tool.pricing.type === 'Free' && (
+                          <div className="px-4 py-1 rounded-full text-base font-bold shadow-sm w-fit text-center bg-[#e6fbe6] text-[#1a4d2e]" style={{fontFamily: 'Noto Sans KR, Inter, sans-serif'}}>
+                            💰 무료 사용 가능
                           </div>
                         )}
                       </div>
-                      {/* 난이도 뱃지: 카드 왼쪽 하단에 고정 */}
-                      {tool.difficulty && (
-                        <div className={`mt-6 px-4 py-1 rounded-full text-base font-bold shadow-sm w-fit text-center ${tool.difficulty === '입문자 추천' ? 'bg-[#e6fbe6] text-[#1a4d2e]' : tool.difficulty === '프롬프트 필요' ? 'bg-[#fff7e6] text-[#7a5a00]' : 'bg-[#ffe6e6] text-[#7a1a1a]'}`}
-                          style={{fontFamily: 'Noto Sans KR, Inter, sans-serif'}}>
-                          {tool.difficulty}
-                        </div>
-                      )}
                     </div>
                     {/* 오른쪽: 상세 정보(추천/기능/지원환경/예시 영상) */}
                     <div className="flex-1 flex flex-row gap-8 overflow-hidden box-border flex-nowrap md:flex-row flex-col min-w-0 max-w-full bg-[#f5f7fa] rounded-2xl p-8">
@@ -174,7 +208,7 @@ export default function Home() {
                           {tool.platforms.map((p, idx) => (
                             <span key={p.name} className="inline-flex min-w-fit whitespace-nowrap items-center gap-1 bg-[#e9f0fb] rounded px-4 py-2 text-base font-medium" style={{fontFamily: 'Noto Sans KR, Inter, sans-serif'}}>
                               {platformIcons[p.name]?.icon}
-                              <span className="hidden md:inline font-medium text-[#3b4a6b]">{platformIcons[p.name]?.label}</span>
+                              <span className="font-medium text-[#3b4a6b]">{platformIcons[p.name]?.label}</span>
                             </span>
                           ))}
                         </div>
@@ -245,6 +279,22 @@ export default function Home() {
           )}
         </div>
       </div>
+      <style jsx>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slide-up {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.5s ease-out;
+        }
+        .animate-slide-up {
+          animation: slide-up 0.6s ease-out;
+        }
+      `}</style>
     </main>
   );
 } 

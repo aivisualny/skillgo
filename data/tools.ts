@@ -7,6 +7,9 @@ export interface ExtendedTool extends Tool {
   koreanSupport?: boolean; // 한국어 지원 여부
   fileTypes?: string[]; // 지원 파일 형식
   exampleVideoUrl?: string; // 예시 영상 URL
+  recommendList?: string[];
+  sampleVideo?: string;
+  userReviews?: { content: string; source: string; url?: string }[];
 }
 
 export const tools: ExtendedTool[] = [
@@ -42,7 +45,17 @@ export const tools: ExtendedTool[] = [
     recommend: '✅ 영상 편집 경험 없이도 가능\n✅ 한국어 프롬프트 지원',
     koreanSupport: true,
     fileTypes: ['mp4', 'mov'],
-    exampleVideoUrl: 'https://www.youtube.com/embed/1Q0Q8Qe4QnA'
+    exampleVideoUrl: 'https://www.youtube.com/embed/1Q0Q8Qe4QnA',
+    recommendList: [
+      '✅ 유튜브 영상 만들고 싶은 분',
+      '🎓 영상 편집이 처음인 분',
+      '💻 무료 체험 먼저 해보고 싶은 분'
+    ],
+    sampleVideo: 'https://www.youtube.com/embed/1Q0Q8Qe4QnA',
+    userReviews: [
+      { content: '영상 자막 기능이 정말 편해요!', source: 'YouTube', url: 'https://youtu.be/xxxx' },
+      { content: '무료 체험으로 충분히 써볼 수 있어 좋았어요.', source: '블로그' }
+    ]
   },
   {
     id: '2',
@@ -102,7 +115,17 @@ export const tools: ExtendedTool[] = [
     recommend: '✅ 영상 편집 경험 없이도 가능\n✅ 한국어 프롬프트 지원',
     koreanSupport: true,
     fileTypes: ['mp4', 'mov'],
-    exampleVideoUrl: 'https://www.youtube.com/embed/1Q0Q8Qe4QnA'
+    exampleVideoUrl: 'https://www.youtube.com/embed/1Q0Q8Qe4QnA',
+    recommendList: [
+      '✅ 유튜브 영상 만들고 싶은 분',
+      '🎓 영상 편집이 처음인 분',
+      '💻 무료 체험 먼저 해보고 싶은 분'
+    ],
+    sampleVideo: 'https://www.youtube.com/embed/1Q0Q8Qe4QnA',
+    userReviews: [
+      { content: '너무 간편하게 영상 만들 수 있었어요!', source: 'YouTube', url: 'https://youtu.be/xxxx' },
+      { content: 'UI가 세련되었지만 렌더링 속도가 느림', source: '블로그' }
+    ]
   },
   {
     id: '4',
@@ -179,7 +202,17 @@ export const tools: ExtendedTool[] = [
     recommend: '✅ 영상 편집 경험 없이도 가능\n✅ 한국어 프롬프트 지원',
     koreanSupport: true,
     fileTypes: ['mp4', 'mov'],
-    exampleVideoUrl: 'https://www.youtube.com/embed/1Q0Q8Qe4QnA'
+    exampleVideoUrl: 'https://www.youtube.com/embed/1Q0Q8Qe4QnA',
+    recommendList: [
+      '✅ 유튜브 영상 만들고 싶은 분',
+      '🎓 영상 편집이 처음인 분',
+      '💻 무료 체험 먼저 해보고 싶은 분'
+    ],
+    sampleVideo: 'https://www.youtube.com/embed/1Q0Q8Qe4QnA',
+    userReviews: [
+      { content: '너무 간편하게 영상 만들 수 있었어요!', source: 'YouTube', url: 'https://youtu.be/xxxx' },
+      { content: 'UI가 세련되었지만 렌더링 속도가 느림', source: '블로그' }
+    ]
   },
   {
     id: '7',

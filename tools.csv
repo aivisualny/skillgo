@@ -1,0 +1,4 @@
+tool,user_review_content,user_review_source,sample_video_url,sample_video_desc
+RunwayML,"영상 생성이 직관적이고 간편해서 초보자도 쉽게 사용할 수 있었어요.",YouTube,https://www.youtube.com/embed/1Q0Q8Qe4QnA,실제 RunwayML로 만든 영상
+RunwayML,"UI가 세련되고 다양한 템플릿이 마음에 들어요.",블로그,https://www.youtube.com/embed/2Q0Q8Qe4QnB,다른 샘플 영상
+Adobe Premiere Pro,"무료 체험으로 충분히 써볼 수 있어 좋았어요.",블로그,https://www.youtube.com/embed/3Q0Q8Qe4QnC,Premiere Pro로 만든 영상 
